@@ -6,6 +6,15 @@
   <meta name="theme-color" content="#0f172a" />
   <title>เกมฝึกจำสระภาษาอังกฤษ</title>
   <meta name="description" content="เกมฝึกจำเสียงสระภาษาอังกฤษ เทียบกับสระไทย พร้อมโหมดสะกดคำและฟังเสียง" />
+
+  <!-- PWA: ติดตั้งบนมือถือได้ -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="สระอังกฤษ" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -120,5 +129,13 @@
 
   <script src="vowels.js"></script>
   <script src="game.js"></script>
+  <script>
+    // ลงทะเบียน Service Worker (เล่นออฟไลน์ + ติดตั้งบนมือถือ)
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>

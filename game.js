@@ -89,12 +89,14 @@ if ("speechSynthesis" in window) {
   loadVoices();
   speechSynthesis.addEventListener("voiceschanged", loadVoices);
 }
-function speak(text) {
+const RATE_NORMAL = 0.85;
+const RATE_SOUNDOUT = 0.5; // ช้าลงตอน "อ่านออกเสียงสระก่อนถาม"
+function speak(text, rate = RATE_NORMAL) {
   if (!("speechSynthesis" in window)) return;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "en-US";
-  u.rate = 0.85;
+  u.rate = rate;
   if (EN_VOICE) u.voice = EN_VOICE;
   speechSynthesis.speak(u);
 }
@@ -273,7 +275,7 @@ function renderQuizQuestion(v) {
   $("ask-text").innerHTML = "สระนี้ตรงกับสระไทยตัวไหน?";
   const word = randomExample(v); // คำต่างกันแต่ละครั้ง = บริบทหลากหลาย
   $("btn-audio").onclick = () => speak(randomExample(v));
-  speak(word); // ออกเสียงอัตโนมัติ (เสียงผู้พูดสุ่ม) → ผูกเสียงกับตัวอักษร
+  speak(word, RATE_SOUNDOUT); // อ่านออกเสียงช้า ๆ ก่อนถาม → ได้ยินสระชัด
   const choices = makeChoices(v.thai, VOWELS.map((x) => x.thai), preferredDistractors(v, "quiz"));
   renderChoiceButtons(choices, v.thai, v);
 }
@@ -283,7 +285,7 @@ function renderSpellQuestion(v) {
   $("question").innerHTML = `<span class="spell-word">${masked}</span>`;
   $("ask-text").innerHTML = `เสียงสระ: <span class="thai-hint">${v.thai}</span> — เติมสระที่หาย`;
   $("btn-audio").onclick = () => speak(v.spellWord);
-  speak(v.spellWord);
+  speak(v.spellWord, RATE_SOUNDOUT); // อ่านช้า ๆ ก่อน ให้ได้ยินสระที่ต้องเติม
 
   if (state.typeMode) renderTypeInput(v);
   else {
