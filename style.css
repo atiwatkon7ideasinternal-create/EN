@@ -284,6 +284,18 @@ h3 {
 
 .hint-line { color: var(--muted); font-size: .82rem; margin-top: 10px; line-height: 1.5; }
 
+/* ── คำอธิบายการนับความแม่นยำ ── */
+.info-mastery { margin-top: 14px; }
+.mastery-help { list-style: none; padding: 0; margin: 0; }
+.mastery-help li {
+  position: relative; padding: 5px 0 5px 18px;
+  color: var(--muted); font-size: .85rem; line-height: 1.5;
+  border-bottom: 1px solid var(--line);
+}
+.mastery-help li:last-child { border-bottom: none; }
+.mastery-help li::before { content: "•"; position: absolute; left: 4px; color: var(--primary); }
+.mastery-help b { color: var(--text); font-weight: 700; }
+
 .hi-score { color: var(--muted); font-size: .88rem; margin-top: 14px; text-align: center; display: flex; align-items: center; justify-content: center; gap: .3em; }
 .hi-score .icon { color: var(--primary); }
 .footnote { text-align: center; color: var(--muted-2); font-size: .8rem; margin-top: 18px; }
