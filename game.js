@@ -61,6 +61,11 @@ const showScreen = (id) => {
   document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
   $(id).classList.add("active");
 };
+// เลื่อนให้เห็นเฉลย + ปุ่มถัดไป อัตโนมัติเมื่อตอบ (ไม่ต้องเลื่อนเอง)
+function scrollToFeedback() {
+  const sc = document.querySelector(".screen.active .screen-scroll");
+  if (sc) requestAnimationFrame(() => sc.scrollTo({ top: sc.scrollHeight, behavior: "smooth" }));
+}
 
 // ── ความแม่น (Leitner box) ──
 function loadMastery() {
@@ -404,6 +409,7 @@ function handleAnswer(btn, picked, correctVal, v, wrap) {
 
   renderFeedback(isCorrect, v);
   $("btn-next").classList.remove("hidden");
+  scrollToFeedback();
 }
 
 // แทรกคำถามเดิมกลับเข้าคิวแบบ "ขยายช่วงห่าง" (expanding retrieval, Landauer & Bjork 1978)

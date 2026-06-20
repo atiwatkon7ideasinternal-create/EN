@@ -133,6 +133,7 @@ function vocabAnswer(btn, picked, v, wrap) {
     </div>`;
   $("feedback").querySelector(".mini-audio").onclick = () => speak(v.example.replace(/[{}]/g, ""));
   $("btn-next").classList.remove("hidden");
+  scrollToFeedback();
 }
 
 function vocabNext() {
