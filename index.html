@@ -24,27 +24,25 @@
     <!-- ───────── หน้าเริ่มต้น ───────── -->
     <section id="screen-start" class="screen active" aria-label="หน้าเริ่มต้น">
       <div class="screen-scroll">
-        <header class="hero">
-          <h1><img class="app-logo" src="logo.png" alt="HootNote" /> HootNote</h1>
-          <p class="subtitle">ฝึกสระอังกฤษ + คำศัพท์ Oxford 3000</p>
-        </header>
-
-        <details class="advanced info-mastery">
-          <summary>
-            <span class="advanced-label">ความแม่นยำนับยังไง?</span>
-            <span class="advanced-chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="advanced-body">
-            <p class="mh-intro">ตอบถูกซ้ำ ๆ คำนั้นจะ <b>แม่นขึ้นทีละขั้น</b> — ครบ 4 ขั้นเมื่อไหร่ = <b class="mh-green">แม่นแล้ว</b> ขึ้นสีเขียว</p>
-            <div class="mh-dots"><i></i><i></i><i></i><i></i><span class="mh-green"><span class="icon" data-icon="check"></span> แม่นแล้ว</span></div>
-            <ul class="mastery-help">
-              <li>ตอบ<b class="mh-green">ถูก</b>บ่อย ๆ → แม่นขึ้น (ราว 4 ครั้ง คนละรอบ ก็เขียว)</li>
-              <li>ตอบ<b class="mh-red">ผิด</b> → ถอยหลัง ระบบจะเอาคำนั้นมาถามซ้ำบ่อยขึ้น</li>
-              <li>เลข "แม่นแล้ว X / ทั้งหมด" = จำนวนคำที่<b>เขียว</b>แล้ว</li>
-              <li>จำความคืบหน้าให้เองในเครื่อง — เล่นต่อวันหลังได้ ไม่ต้องล็อกอิน</li>
-            </ul>
-          </div>
-        </details>
+        <div class="brand-bar">
+          <span class="brand-id">
+            <img class="app-logo" src="logo.png" alt="HootNote" />
+            <span class="brand-name">HootNote</span>
+          </span>
+          <details class="info-mastery">
+            <summary class="info-chip" aria-label="ความแม่นยำนับยังไง?" title="ความแม่นยำนับยังไง?">?</summary>
+            <div class="info-pop">
+              <p class="mh-intro">ตอบถูกซ้ำ ๆ คำนั้นจะ <b>แม่นขึ้นทีละขั้น</b> — ครบ 4 ขั้นเมื่อไหร่ = <b class="mh-green">แม่นแล้ว</b> ขึ้นสีเขียว</p>
+              <div class="mh-dots"><i></i><i></i><i></i><i></i><span class="mh-green"><span class="icon" data-icon="check"></span> แม่นแล้ว</span></div>
+              <ul class="mastery-help">
+                <li>ตอบ<b class="mh-green">ถูก</b>บ่อย ๆ → แม่นขึ้น (ราว 4 ครั้ง คนละรอบ ก็เขียว)</li>
+                <li>ตอบ<b class="mh-red">ผิด</b> → ถอยหลัง ระบบจะเอาคำนั้นมาถามซ้ำบ่อยขึ้น</li>
+                <li>เลข "แม่นแล้ว X / ทั้งหมด" = จำนวนคำที่<b>เขียว</b>แล้ว</li>
+                <li>จำความคืบหน้าให้เองในเครื่อง — เล่นต่อวันหลังได้ ไม่ต้องล็อกอิน</li>
+              </ul>
+            </div>
+          </details>
+        </div>
 
         <div class="option-row subject-switch" id="subject-options" role="group" aria-label="เลือกวิชา">
           <button class="chip active" data-subject="vowel">สระ</button>
