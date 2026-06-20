@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>เกมฝึกจำสระภาษาอังกฤษ</title>
+  <meta name="description" content="เกมฝึกจำเสียงสระภาษาอังกฤษ เทียบกับสระไทย พร้อมโหมดสะกดคำและฟังเสียง" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ───────── หน้าเริ่มต้น ───────── -->
+    <section id="screen-start" class="screen active" aria-label="หน้าเริ่มต้น">
+      <div class="screen-scroll">
+        <header class="hero">
+          <h1><span class="icon icon-title" data-icon="target"></span> ฝึกจำสระอังกฤษ</h1>
+          <p class="subtitle">ทายว่าสระอังกฤษตรงกับสระไทยตัวไหน — เล่นจนจำได้แม่น!</p>
+        </header>
+
+        <div class="card">
+          <div class="field">
+            <h3 id="lbl-mode">เลือกโหมด</h3>
+            <div class="option-row" id="mode-options" role="group" aria-labelledby="lbl-mode">
+              <button class="chip active" data-mode="quiz"><span class="icon" data-icon="help"></span> ทายสระ</button>
+              <button class="chip" data-mode="spell"><span class="icon" data-icon="edit"></span> สะกดคำ</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <h3 id="lbl-group">เลือกกลุ่มสระ</h3>
+            <div class="group-grid" id="group-options" role="group" aria-labelledby="lbl-group"></div>
+          </div>
+
+          <details class="advanced">
+            <summary>
+              <span class="advanced-label">การทบทวน (ตั้งค่าเพิ่มเติม)</span>
+              <span class="advanced-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="advanced-body">
+              <div class="option-row">
+                <button class="chip" id="focus-weak" data-on="false"><span class="icon" data-icon="target"></span> เน้นคำที่ยังไม่แม่น</button>
+                <button class="chip" id="type-mode" data-on="false"><span class="icon" data-icon="edit"></span> พิมพ์เอง (ยากขึ้น)</button>
+              </div>
+              <p class="hint-line">โหมดพิมพ์เองใช้กับ “สะกดคำ” — พิมพ์คำตอบเองช่วยให้จำลึกกว่าการเลือก</p>
+            </div>
+          </details>
+
+          <div class="mastery-box" id="mastery-summary"></div>
+          <p class="hi-score" id="hi-score"></p>
+        </div>
+
+        <p class="footnote">เล่นได้เรื่อย ๆ • ไม่ต้องล็อกอิน • ใช้บนมือถือได้</p>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn-primary" id="btn-start"><span class="icon" data-icon="play"></span> เริ่มเล่น</button>
+        <button class="btn-text" id="btn-reset-stats">ล้างสถิติการเรียน</button>
+      </div>
+    </section>
+
+    <!-- ───────── หน้าเล่นเกม ───────── -->
+    <section id="screen-quiz" class="screen" aria-label="หน้าเล่นเกม">
+      <div class="quiz-head">
+        <div class="topbar">
+          <span class="topbar-left"><span id="progress-text">ข้อ 1 / 10</span> <span id="review-badge" class="review-badge hidden"><span class="icon" data-icon="repeat"></span> ทบทวน</span></span>
+          <span id="score-text">คะแนน: 0</span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-label="ความคืบหน้า"><div id="progress-fill"></div></div>
+      </div>
+
+      <div class="screen-scroll">
+        <div class="question-area">
+          <div class="prompt-row">
+            <div class="big-vowel" id="question" aria-live="polite"></div>
+          </div>
+          <div class="ipa-text" id="ipa-text" aria-label="สัญลักษณ์เสียง IPA"></div>
+          <button class="btn-audio" id="btn-audio" aria-label="ฟังเสียงอีกครั้ง" title="ฟังเสียงอีกครั้ง" data-icon="volume"></button>
+          <p class="audio-hint">แตะลำโพงเพื่อฟังซ้ำ</p>
+          <p class="ask" id="ask-text">สระนี้ตรงกับสระไทยตัวไหน?</p>
+        </div>
+
+        <div class="choices" id="choices"></div>
+
+        <div class="feedback" id="feedback" aria-live="polite"></div>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn-primary hidden" id="btn-next">ถัดไป →</button>
+      </div>
+    </section>
+
+    <!-- ───────── หน้าสรุปผล ───────── -->
+    <section id="screen-result" class="screen" aria-label="หน้าสรุปผล">
+      <div class="screen-scroll">
+        <header class="hero">
+          <h1><span class="icon icon-title" data-icon="trophy"></span> จบเกม!</h1>
+        </header>
+        <div class="card result-card">
+          <p class="result-score" id="result-score">16 / 20</p>
+          <div class="percent-badge" id="result-percent">80%</div>
+          <p id="result-detail"></p>
+        </div>
+
+        <div class="card wrong-card" id="wrong-card">
+          <h3>สระที่ตอบผิด (ลองทบทวน)</h3>
+          <ul id="wrong-list"></ul>
+        </div>
+      </div>
+
+      <div class="action-bar action-bar-stack">
+        <button class="btn-primary" id="btn-replay">เล่นอีกครั้ง</button>
+        <button class="btn-secondary" id="btn-replay-wrong">เล่นเฉพาะข้อที่ผิด</button>
+        <button class="btn-text" id="btn-home">← กลับหน้าแรก</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="vowels.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
