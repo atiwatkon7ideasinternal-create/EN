@@ -28,36 +28,54 @@
           <p class="subtitle">ทายว่าสระอังกฤษตรงกับสระไทยตัวไหน — เล่นจนจำได้แม่น!</p>
         </header>
 
+        <div class="option-row subject-switch" id="subject-options" role="group" aria-label="เลือกวิชา">
+          <button class="chip active" data-subject="vowel">สระ</button>
+          <button class="chip" data-subject="vocab">คำศัพท์ Oxford</button>
+        </div>
+
         <div class="card">
-          <div class="field">
-            <h3 id="lbl-mode">เลือกโหมด</h3>
-            <div class="option-row" id="mode-options" role="group" aria-labelledby="lbl-mode">
-              <button class="chip active" data-mode="quiz"><span class="icon" data-icon="help"></span> ทายสระ</button>
-              <button class="chip" data-mode="spell"><span class="icon" data-icon="edit"></span> สะกดคำ</button>
-            </div>
-          </div>
-
-          <div class="field">
-            <h3 id="lbl-group">เลือกกลุ่มสระ</h3>
-            <div class="group-grid" id="group-options" role="group" aria-labelledby="lbl-group"></div>
-          </div>
-
-          <details class="advanced">
-            <summary>
-              <span class="advanced-label">การทบทวน (ตั้งค่าเพิ่มเติม)</span>
-              <span class="advanced-chevron" aria-hidden="true"></span>
-            </summary>
-            <div class="advanced-body">
-              <div class="option-row">
-                <button class="chip" id="focus-weak" data-on="false"><span class="icon" data-icon="target"></span> เน้นคำที่ยังไม่แม่น</button>
-                <button class="chip" id="type-mode" data-on="false"><span class="icon" data-icon="edit"></span> พิมพ์เอง (ยากขึ้น)</button>
+          <!-- ── โหมดสระ ── -->
+          <div id="vowel-panel">
+            <div class="field">
+              <h3 id="lbl-mode">เลือกโหมด</h3>
+              <div class="option-row" id="mode-options" role="group" aria-labelledby="lbl-mode">
+                <button class="chip active" data-mode="quiz"><span class="icon" data-icon="help"></span> ทายสระ</button>
+                <button class="chip" data-mode="spell"><span class="icon" data-icon="edit"></span> สะกดคำ</button>
               </div>
-              <p class="hint-line">โหมดพิมพ์เองใช้กับ “สะกดคำ” — พิมพ์คำตอบเองช่วยให้จำลึกกว่าการเลือก</p>
             </div>
-          </details>
 
-          <div class="mastery-box" id="mastery-summary"></div>
-          <p class="hi-score" id="hi-score"></p>
+            <div class="field">
+              <h3 id="lbl-group">เลือกกลุ่มสระ</h3>
+              <div class="group-grid" id="group-options" role="group" aria-labelledby="lbl-group"></div>
+            </div>
+
+            <details class="advanced">
+              <summary>
+                <span class="advanced-label">การทบทวน (ตั้งค่าเพิ่มเติม)</span>
+                <span class="advanced-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="advanced-body">
+                <div class="option-row">
+                  <button class="chip" id="focus-weak" data-on="false"><span class="icon" data-icon="target"></span> เน้นคำที่ยังไม่แม่น</button>
+                  <button class="chip" id="type-mode" data-on="false"><span class="icon" data-icon="edit"></span> พิมพ์เอง (ยากขึ้น)</button>
+                </div>
+                <p class="hint-line">โหมดพิมพ์เองใช้กับ “สะกดคำ” — พิมพ์คำตอบเองช่วยให้จำลึกกว่าการเลือก</p>
+              </div>
+            </details>
+
+            <div class="mastery-box" id="mastery-summary"></div>
+            <p class="hi-score" id="hi-score"></p>
+          </div>
+
+          <!-- ── โหมดคำศัพท์ Oxford 3000 ── -->
+          <div id="vocab-panel" class="hidden">
+            <div class="field">
+              <h3 id="lbl-level">เลือกระดับ (CEFR)</h3>
+              <div class="group-grid" id="level-options" role="group" aria-labelledby="lbl-level"></div>
+            </div>
+            <div class="mastery-box" id="vocab-progress"></div>
+            <p class="hint-line">เล่นรอบละ 10 คำ · ผสมคำใหม่ + ทบทวนคำเก่า/คำที่เคยตอบผิด · เล่นไปเรื่อย ๆ จนครบทุกคำในระดับ</p>
+          </div>
         </div>
 
         <p class="footnote">เล่นได้เรื่อย ๆ • ไม่ต้องล็อกอิน • ใช้บนมือถือได้</p>
@@ -128,7 +146,9 @@
   </div>
 
   <script src="vowels.js"></script>
+  <script src="vocab.js"></script>
   <script src="game.js"></script>
+  <script src="vocab-game.js"></script>
   <script>
     // ลงทะเบียน Service Worker (เล่นออฟไลน์ + ติดตั้งบนมือถือ)
     if ("serviceWorker" in navigator) {
