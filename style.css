@@ -298,7 +298,16 @@ h3 {
     calc(var(--safe-l) + var(--pad));
 }
 .topbar { display: flex; justify-content: space-between; align-items: center; font-size: .9rem; color: var(--muted); }
-.topbar-left { display: inline-flex; align-items: center; }
+.topbar-left { display: inline-flex; align-items: center; gap: 4px; }
+.btn-back {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; margin-left: -8px; margin-right: 2px;
+  background: none; border: none; cursor: pointer; color: var(--muted);
+  border-radius: var(--radius-pill); font-size: 1.2rem;
+  transition: background .15s, color .15s;
+}
+.btn-back:hover { background: var(--card-2); color: var(--text); }
+.btn-back:active { transform: scale(.92); }
 #score-text { color: var(--text); font-weight: 800; }
 .progress-bar { height: 10px; background: var(--card-2); border-radius: var(--radius-pill); overflow: hidden; margin-top: 10px; }
 #progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--primary), var(--primary-strong)); border-radius: var(--radius-pill); transition: width .35s ease; }
@@ -374,9 +383,9 @@ h3 {
 .choice.wrong { background: var(--red-d); border-color: var(--red); color: #fff; }
 
 /* ── Typed answer (generation effect) ── */
-.type-row { grid-column: 1 / -1; display: flex; gap: 10px; }
+.type-row { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 10px; }
 .type-input {
-  flex: 1;
+  width: 100%;
   background: var(--bg-2);
   border: 2px solid var(--card-2);
   color: var(--text);
@@ -391,7 +400,7 @@ h3 {
 .type-input:focus { border-color: var(--primary); }
 .type-input.input-ok { border-color: var(--green); background: rgba(52,211,153,.16); }
 .type-input.input-no { border-color: var(--red); background: rgba(248,113,113,.16); }
-.type-submit { width: auto; min-height: 60px; margin-top: 0; padding: 0 24px; }
+.type-submit { width: 100%; min-height: 56px; margin-top: 0; padding: 0 24px; }
 .spell-input-row { display: flex; gap: 8px; justify-content: center; margin-top: 6px; }
 
 /* ── Feedback ── */

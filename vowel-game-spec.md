@@ -54,76 +54,125 @@
 ตารางข้อมูลหลักของเกม — เป็นหัวใจของเว็บ เก็บเป็น array of objects ใน JS/JSON
 แต่ละตัวมี **คำตัวอย่าง + ประโยคตัวอย่าง** เพื่อช่วยให้จำเสียงสระได้ง่ายจริง ๆ
 
-### 3.1 กลุ่ม "Magic e" (Split Digraph) — `a-e`, `i-e`, `o-e`, `u-e`, `e-e`
-> สระ + พยัญชนะ + **e** ท้ายคำ → ตัว e ไม่ออกเสียง แต่ทำให้สระข้างหน้า "ออกเสียงชื่อตัวอักษร"
-> เคล็ดจำ: **"e เงียบ แต่มีเวทมนตร์"** เปลี่ยนเสียงสระสั้น → ยาว (cap → cape)
+รวมทั้งหมด **42 สระผสม** แบ่งเป็น **9 หมวดย่อยตามตระกูลเสียง** (เล่นทีละหมวดจะสั้น เล่นจบไว)
+แต่ละตัวมีคำตัวอย่าง + ประโยคตัวอย่าง + เคล็ดจำ
 
-| แพทเทิร์น | เสียง (IPA) | สระไทยที่ตรง | คำตัวอย่าง | ประโยคตัวอย่าง |
-|-----------|-------------|--------------|------------|----------------|
-| `a-e` | /eɪ/ | เอ (เอ-อิ) | game, cake, name | I play a **game**. — Make a **cake**. |
-| `i-e` | /aɪ/ | ไอ (อาย) | bike, time, nice | I ride my **bike**. — What **time** is it? |
-| `o-e` | /oʊ/ | โอ | home, nose, bone | I go **home**. — Touch your **nose**. |
-| `u-e` | /juː/ | อิว/ยู | cute, cube, use | The cat is **cute**. — **Use** a pen. |
-| `e-e` | /iː/ | อี | these, theme, Pete | I like **these**. — A fun **theme**. |
+### 3.1 Magic e (5) — สระ + พยัญชนะ + e เงียบ
+> เคล็ดจำ: **"e เงียบ แต่มีเวทมนตร์"** ทำให้สระข้างหน้าออกเสียงชื่อตัวอักษร (cap → cape)
 
-### 3.2 กลุ่มสระผสม (Vowel Teams / Digraphs)
+| แพทเทิร์น | IPA | สระไทย | คำตัวอย่าง |
+|-----------|-----|--------|------------|
+| `a_e` | /eɪ/ | เอ | game, cake, name |
+| `i_e` | /aɪ/ | ไอ | bike, time, nice |
+| `o_e` | /oʊ/ | โอ | home, nose, bone |
+| `u_e` | /juː/ | ยู | cute, cube, use |
+| `e_e` | /iː/ | อี | these, theme, Pete |
 
-| สระอังกฤษ | เสียง (IPA) | สระไทยที่ตรง | คำตัวอย่าง | ประโยคตัวอย่าง |
-|-----------|-------------|--------------|------------|----------------|
-| `ee` | /iː/ | อี (◌ี) | see, tree, bee | I **see** a **tree**. |
-| `ea` | /iː/ | อี (◌ี) | sea, tea, eat | Let's **eat** by the **sea**. |
-| `oo` | /uː/ | อู (◌ู) | moon, food, soon | The **moon** is bright. |
-| `oo` | /ʊ/ | อุ (◌ุ) | book, good, look | **Look** at this **book**. |
-| `ai` | /eɪ/ | เอ (เ◌) | rain, train, wait | **Wait** for the **train**. |
-| `ay` | /eɪ/ | เอ (เ◌) | day, play, say | Let's **play** to**day**. |
-| `oa` | /oʊ/ | โอ (โ◌) | boat, road, coat | A **boat** on the **road**? |
-| `ow` | /oʊ/ | โอ (โ◌) | snow, low, grow | The **snow** is **low**. |
-| `ow` | /aʊ/ | เอา | now, cow, how | The **cow** is here **now**. |
-| `ou` | /aʊ/ | เอา | house, mouse, out | A **mouse** in the **house**. |
-| `oi` | /ɔɪ/ | ออย | coin, boil, voice | I drop a **coin**. |
-| `oy` | /ɔɪ/ | ออย | boy, toy, joy | The **boy** has a **toy**. |
-| `igh` | /aɪ/ | ไอ (อาย) | high, light, night | A **light** at **night**. |
-| `ie` | /aɪ/ | ไอ (อาย) | pie, tie, lie | I eat a **pie**. |
+### 3.2 เสียง เอ /eɪ/ (5)
+| สระ | IPA | สระไทย | คำตัวอย่าง |
+|-----|-----|--------|------------|
+| `ai` | /eɪ/ | เอ | rain, train, wait |
+| `ay` | /eɪ/ | เอ | day, play, say |
+| `ey` | /eɪ/ | เอ | they, grey, obey |
+| `eigh` | /eɪ/ | เอ | eight, weigh, sleigh |
+| `ei` | /eɪ/ | เอ | vein, rein, veil |
 
-### 3.3 กลุ่มสระ + R (R-controlled)
+### 3.3 เสียง อี /iː/ (4)
+| สระ | IPA | สระไทย | คำตัวอย่าง |
+|-----|-----|--------|------------|
+| `ee` | /iː/ | อี | see, tree, bee |
+| `ea` | /iː/ | อี | sea, tea, eat |
+| `ey` | /iː/ | อี | key, money, honey |
+| `ie` | /iː/ | อี | field, chief, believe |
 
-| สระอังกฤษ | เสียง (IPA) | สระไทยที่ตรง | คำตัวอย่าง | ประโยคตัวอย่าง |
-|-----------|-------------|--------------|------------|----------------|
-| `ar` | /ɑː/ | อา (◌า) | car, far, star | The **car** is **far**. |
-| `or` | /ɔː/ | ออ (◌อ) | for, born, corn | This is **for** you. |
-| `er` | /ɜː/ | เออ | her, term, person | I see **her**. |
-| `ir` | /ɜː/ | เออ | bird, girl, first | The **bird** is **first**. |
-| `ur` | /ɜː/ | เออ | turn, burn, nurse | It's my **turn**. |
-| `au` | /ɔː/ | ออ (◌อ) | sauce, August | Add the **sauce**. |
-| `aw` | /ɔː/ | ออ (◌อ) | saw, draw, law | I **saw** a dog. |
+### 3.4 เสียง โอ /oʊ/ (3)
+| สระ | IPA | สระไทย | คำตัวอย่าง |
+|-----|-----|--------|------------|
+| `oa` | /oʊ/ | โอ | boat, road, coat |
+| `ow` | /oʊ/ | โอ | snow, low, grow |
+| `oe` | /oʊ/ | โอ | toe, goes, hoe |
 
-> 📌 **หมายเหตุ:** เริ่มต้นเล่นทีละกลุ่มได้ (เช่น เริ่มกลุ่ม magic e ก่อน)
-> สามารถปรับ/เพิ่ม/ลบได้ตามต้องการ เพราะอ่านจากไฟล์ data ตัวเดียว
+### 3.5 เสียง อู / ยู / อุ (5)
+| สระ | IPA | สระไทย | คำตัวอย่าง |
+|-----|-----|--------|------------|
+| `oo` | /uː/ | อู | moon, food, soon |
+| `oo` | /ʊ/ | อุ | book, good, look |
+| `ew` | /uː/ | อู | new, few, grew |
+| `ue` | /uː/ | อู | blue, true, glue |
+| `ui` | /uː/ | อู | fruit, juice, suit |
 
-### 3.4 โครงสร้างข้อมูล (Data Schema)
+### 3.6 สระประสม — ไอ · ออย · เอา (6)
+| สระ | IPA | สระไทย | คำตัวอย่าง |
+|-----|-----|--------|------------|
+| `igh` | /aɪ/ | ไอ | high, light, night |
+| `ie` | /aɪ/ | ไอ | pie, tie, lie |
+| `oi` | /ɔɪ/ | ออย | coin, boil, voice |
+| `oy` | /ɔɪ/ | ออย | boy, toy, joy |
+| `ow` | /aʊ/ | เอา | now, cow, how |
+| `ou` | /aʊ/ | เอา | house, mouse, out |
+
+### 3.7 เสียง ออ /ɔː/ (3)
+| สระ | IPA | สระไทย | คำตัวอย่าง |
+|-----|-----|--------|------------|
+| `au` | /ɔː/ | ออ | sauce, August, author |
+| `aw` | /ɔː/ | ออ | saw, draw, law |
+| `augh` | /ɔː/ | ออ | caught, taught, daughter |
+
+### 3.8 สระ + R พื้นฐาน (5)
+| สระ | IPA | สระไทย | คำตัวอย่าง |
+|-----|-----|--------|------------|
+| `ar` | /ɑː/ | อา | car, far, star |
+| `or` | /ɔː/ | ออ | corn, born, fork |
+| `er` | /ɜː/ | เออ | her, term, person |
+| `ir` | /ɜː/ | เออ | bird, girl, first |
+| `ur` | /ɜː/ | เออ | turn, burn, nurse |
+
+### 3.9 สระ + R พิเศษ — แอร์ · เอีย · ออร์ (6)
+| สระ | IPA | สระไทย | คำตัวอย่าง |
+|-----|-----|--------|------------|
+| `air` | /eə/ | แอร์ | hair, chair, fair |
+| `are` | /eə/ | แอร์ | care, share, bare |
+| `ear` | /ɪə/ | เอีย | hear, ear, year |
+| `eer` | /ɪə/ | เอีย | deer, beer, cheer |
+| `ore` | /ɔː/ | ออ | more, store, score |
+| `our` | /ɔː/ | ออ | four, your, pour |
+
+> 📌 **หมายเหตุ:** บางรูปมีหลายเสียง (เช่น `ea` ออก /e/ ได้, `ou` มีหลายเสียง) — เก็บเฉพาะเสียงหลัก ระบุเสียงอื่นไว้ใน `hint`
+> หมวด `ey`/`ie`/`oo`/`ow` ปรากฏ 2 ครั้ง (คนละเสียง) — เสียง auto-play จะช่วยแยกว่าอันไหน
+> แก้/เพิ่ม/ลบได้ที่ไฟล์ `vowels.js` ไฟล์เดียว
+
+### 3.10 โครงสร้างข้อมูล (Data Schema)
+
+9 หมวด: `magic-e` · `long-a` · `long-e` · `long-o` · `long-u` · `diphthong` · `broad-o` · `r-basic` · `r-extra`
 
 ```js
 // vowels.js
 const VOWELS = [
   {
     id: "a-e",
-    group: "magic-e",        // กลุ่มสระ: magic-e | team | r-controlled
-    english: "a-e",          // สระอังกฤษที่แสดงเป็นคำถาม
-    display: "a_e",          // วิธีแสดง (เช่น a_e ให้เห็นช่องว่างพยัญชนะ)
-    ipa: "/eɪ/",             // เสียง IPA (ใบ้/เฉลย)
+    group: "magic-e",        // หมวดย่อยตามตระกูลเสียง (9 หมวด)
+    display: "a_e",          // วิธีแสดงเป็นคำถาม (เช่น a_e ให้เห็นช่องว่างพยัญชนะ)
+    ipa: "/eɪ/",             // เสียง IPA (โชว์ตอนเฉลย)
     thai: "เอ",              // คำตอบที่ถูก (สระไทย)
-    examples: ["game", "cake", "name"],
-    sentence: "I play a **game**.",   // ประโยคตัวอย่าง (ไฮไลต์คำเป้าหมาย)
+    examples: ["game", "cake", "name"], // คำตัวอย่าง (auto-play สุ่มทีละคำ)
+    sentence: "I play a {game}.",       // ประโยคตัวอย่าง — {คำ} = ไฮไลต์เป้าหมาย
     hint: "e เงียบ แต่ทำให้ a ออกเสียง 'เอ'",  // เคล็ดช่วยจำ
-    note: "magic e"
+    spellWord: "game",       // คำสำหรับโหมดสะกด
+    spellAnswer: "a"         // ส่วนที่ต้องเติม (ต้องเป็น substring ของ spellWord)
   },
-  // ... ตัวอื่น ๆ
+  // ... รวม 42 ตัว
 ];
+
+// ป้ายชื่อหมวด (สร้างปุ่มเลือกหมวดอัตโนมัติ)
+const GROUP_LABELS = {
+  "magic-e": { title: "Magic e", ex: "a_e · i_e · o_e · u_e · e_e" },
+  // ... อีก 8 หมวด
+};
 ```
 
 ---
 
-## 3.5 หลักการออกแบบให้ "จำได้ง่ายจริง" (Memory-Aid Design)
+## 3.11 หลักการออกแบบให้ "จำได้ง่ายจริง" (Memory-Aid Design)
 
 หัวใจที่ทำให้เกมนี้ช่วยจำได้จริง ไม่ใช่แค่ทายถูก/ผิด:
 
@@ -137,7 +186,7 @@ const VOWELS = [
 
 ---
 
-## 3.6 งานวิจัยรองรับการออกแบบ (Research Evidence & Citations)
+## 3.12 งานวิจัยรองรับการออกแบบ (Research Evidence & Citations)
 
 หลักการทุกข้อในเกมนี้อ้างอิงงานวิจัยด้าน cognitive science / second-language acquisition
 ที่ผ่านการตรวจสอบ (peer-reviewed meta-analyses เป็นหลัก) — สรุปพร้อม effect size (Hedges' *g*)
@@ -183,7 +232,7 @@ const VOWELS = [
 
 ---
 
-## 3.7 โหมดเล่น (Game Modes)
+## 3.13 โหมดเล่น (Game Modes)
 
 เกมมีหลายโหมดเพื่อฝึกจำจากหลายมุม:
 

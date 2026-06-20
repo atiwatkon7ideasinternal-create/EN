@@ -13,6 +13,7 @@ const ICONS = {
   play: '<polygon points="6 4 20 12 6 20 6 4"/>',
   edit: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
   help: '<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+  back: '<line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>',
 };
 function icon(name) {
   return `<span class="icon"><svg viewBox="0 0 24 24" fill="none">${ICONS[name] || ""}</svg></span>`;
@@ -63,7 +64,8 @@ function loadMastery() {
   try { return JSON.parse(localStorage.getItem(MASTERY_KEY)) || {}; }
   catch { return {}; }
 }
-function saveMastery(m) { localStorage.setItem(MASTERY_KEY, JSON.stringify(m)); }
+function safeSet(key, val) { try { localStorage.setItem(key, val); } catch { /* private mode / quota */ } }
+function saveMastery(m) { safeSet(MASTERY_KEY, JSON.stringify(m)); }
 function getBox(id) { return loadMastery()[id]?.box ?? 0; }
 
 // อัปเดตเฉพาะตอนตอบ "ครั้งแรก" ของรอบ — สะท้อนการจำจริง
@@ -104,6 +106,37 @@ function speak(text, rate = RATE_NORMAL) {
 function randomExample(v) {
   return v.examples[Math.floor(Math.random() * v.examples.length)];
 }
+
+// ── เสียงตอบถูก/ผิด (Web Audio — สร้างเอง ไม่ต้องโหลดไฟล์) ──
+let audioCtx = null;
+function getCtx() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch { audioCtx = null; }
+  }
+  return audioCtx;
+}
+function tone(freqs, dur = 0.12, type = "sine", gain = 0.22) {
+  const ctx = getCtx();
+  if (!ctx) return;
+  if (ctx.state === "suspended") ctx.resume();
+  let t = ctx.currentTime;
+  freqs.forEach((f) => {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = type;
+    o.frequency.value = f;
+    o.connect(g);
+    g.connect(ctx.destination);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.start(t);
+    o.stop(t + dur);
+    t += dur * 0.85;
+  });
+}
+function playCorrect() { tone([660, 990], 0.13, "sine"); }       // ดิ๊ง-ดิ๊ง เสียงสูงขึ้น
+function playWrong() { tone([180], 0.2, "square", 0.14); }       // เสียงต่ำสั้น ๆ (เบา)
 
 // ── หน้าเริ่มต้น: การ์ดเลือกหมวดสระ ──
 function buildGroupOptions() {
@@ -258,7 +291,7 @@ function renderQuestion() {
   const v = state.queue[state.index];
   const isReview = state.attempted.has(v.id);
 
-  $("ipa-text").textContent = v.ipa; // แสดงสัญลักษณ์เสียง IPA ใต้สระ
+  $("ipa-text").textContent = ""; // IPA จะโชว์ตอนเฉลย (ไม่ใบ้ตอนถาม)
   $("progress-text").textContent = `คืบหน้า ${state.attempted.size} / ${state.totalUnique}`;
   $("score-text").textContent = `คะแนน: ${state.correctFirst}`;
   $("progress-fill").style.width = `${(state.attempted.size / state.totalUnique) * 100}%`;
@@ -300,7 +333,7 @@ function renderTypeInput(v) {
   wrap.innerHTML = `
     <div class="type-row">
       <input id="type-input" class="type-input" type="text" autocomplete="off"
-             autocapitalize="off" spellcheck="false" placeholder="พิมพ์สระ เช่น ${v.spellAnswer.length} ตัวอักษร" />
+             autocapitalize="off" spellcheck="false" placeholder="พิมพ์สระที่หาย" />
       <button id="type-submit" class="btn-secondary type-submit">ตอบ</button>
     </div>`;
   const input = $("type-input");
@@ -333,6 +366,8 @@ function handleAnswer(btn, picked, correctVal, v, wrap) {
 
   const isCorrect = picked === correctVal;
   const isFirst = !state.attempted.has(v.id);
+
+  if (isCorrect) playCorrect(); else playWrong(); // เสียงตอบถูก/ผิด
 
   if (btn) {
     // โหมดเลือกตัวเลือก
@@ -382,6 +417,7 @@ function scheduleReask(v) {
 
 // ── เฉลย + ตัวอย่าง ──
 function renderFeedback(isCorrect, v) {
+  $("ipa-text").textContent = v.ipa; // เฉลยแล้วค่อยโชว์ IPA ใต้สระ
   const wordHtml = v.examples.map((w) => highlightVowel(w, v)).join(", ");
   const sentenceHtml = v.sentence.replace(/\{(.+?)\}/, "<mark>$1</mark>");
   $("feedback").innerHTML = `
@@ -428,7 +464,7 @@ function showResult() {
     : `ฝึกอีกหน่อยนะ ลองกด 'เน้นคำที่ยังไม่แม่น' แล้วเล่นซ้ำ ${icon("repeat")}`;
 
   const hi = parseInt(localStorage.getItem(HI_KEY) || "0", 10);
-  if (pct > hi) localStorage.setItem(HI_KEY, String(pct));
+  if (pct > hi) safeSet(HI_KEY, String(pct));
 
   const wrongCard = $("wrong-card");
   if (state.wrongFirst.length === 0) {
@@ -448,6 +484,11 @@ $("btn-start").addEventListener("click", () => startGame());
 $("btn-replay").addEventListener("click", () => startGame());
 $("btn-replay-wrong").addEventListener("click", () => startGame(state.wrongFirst.slice()));
 $("btn-home").addEventListener("click", () => { renderHiScore(); showScreen("screen-start"); });
+$("btn-back").addEventListener("click", () => {
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  renderHiScore();
+  showScreen("screen-start"); // ออกจากรอบปัจจุบัน กลับหน้าแรก
+});
 $("btn-reset-stats").addEventListener("click", () => {
   if (confirm("ล้างสถิติการเรียนทั้งหมด? (ความแม่นของทุกสระจะรีเซ็ต)")) {
     localStorage.removeItem(MASTERY_KEY);
