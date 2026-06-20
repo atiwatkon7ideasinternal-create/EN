@@ -1,12 +1,14 @@
 // Service Worker — ทำให้เล่นออฟไลน์ได้ + ติดตั้งบนมือถือ (PWA)
 // เปลี่ยนเลขเวอร์ชันเมื่อแก้ไฟล์ เพื่อให้ cache อัปเดต
-const CACHE = "vowel-game-v3";
+const CACHE = "vowel-game-v4";
 const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
   "./game.js",
   "./vowels.js",
+  "./vocab.js",
+  "./vocab-game.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
