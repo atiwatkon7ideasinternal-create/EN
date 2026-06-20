@@ -406,6 +406,29 @@ h3 {
   display: flex; align-items: center; justify-content: center; text-align: center;
 }
 
+/* ── หน้ารายละเอียดชุด: รายการคำ ── */
+.word-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.word-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 10px 14px;
+}
+.word-row.word-done { border-color: var(--green); background: linear-gradient(180deg, rgba(52,211,153,.13), transparent); }
+.wr-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.wr-en { font-weight: 700; font-size: 1.05rem; }
+.wr-pos { font-weight: 400; font-size: .8rem; color: var(--muted-2); }
+.wr-th { color: var(--muted); font-size: .85rem; }
+.wr-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; text-align: right; }
+.wr-times { color: var(--muted-2); font-size: .72rem; }
+.wr-box { font-size: .8rem; font-weight: 700; color: var(--muted); display: inline-flex; align-items: center; gap: .3em; white-space: nowrap; }
+.word-row.word-done .wr-box { color: var(--green); }
+#deck-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--primary), var(--green)); border-radius: var(--radius-pill); transition: width .35s; }
+#deck-title { font-weight: 700; color: var(--text); }
+#deck-mastered { color: var(--muted); font-size: .9rem; }
+
+/* โหมดคำศัพท์: หน้าแรกไม่ต้องมีปุ่มล่าง (เข้าเล่นผ่านการ์ดชุด) */
+body.vocab-mode #screen-start .action-bar { display: none; }
+
 /* โหมดคำศัพท์: ย่อส่วนบนให้เห็นคำอธิบายได้โดยไม่ต้องเลื่อน */
 body.vocab-mode .audio-hint { display: none; }
 body.vocab-mode .question-area { margin-bottom: 10px; }

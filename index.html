@@ -165,6 +165,23 @@
       </div>
     </section>
 
+    <!-- ───────── หน้ารายละเอียดชุด (คำในชุด + สถิติ) ───────── -->
+    <section id="screen-deck" class="screen" aria-label="รายละเอียดชุด">
+      <div class="quiz-head">
+        <div class="topbar">
+          <span class="topbar-left"><button class="btn-back" id="btn-deck-back" data-icon="back" aria-label="กลับ" title="กลับ"></button><span id="deck-title">ชุด</span></span>
+          <span id="deck-mastered"></span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-label="ความแม่นของชุด"><div id="deck-fill"></div></div>
+      </div>
+      <div class="screen-scroll">
+        <ul class="word-list" id="deck-word-list"></ul>
+      </div>
+      <div class="action-bar">
+        <button class="btn-primary" id="btn-play-deck"><span class="icon" data-icon="play"></span> เล่นชุดนี้</button>
+      </div>
+    </section>
+
   </div>
 
   <script src="vowels.js"></script>

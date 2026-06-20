@@ -19,8 +19,9 @@ function vSave(m) { try { localStorage.setItem(VMASTERY_KEY, JSON.stringify(m));
 function vGet(word) { return vLoad()[word]; }
 function vUpdate(word, correct) {
   const m = vLoad();
-  const cur = m[word] || { box: 0, seen: false, wrong: false, ts: 0 };
+  const cur = m[word] || { box: 0, seen: false, wrong: false, ts: 0, n: 0 };
   cur.seen = true;
+  cur.n = (cur.n || 0) + 1;     // จำนวนครั้งที่เล่นคำนี้
   cur.ts = Date.now();
   if (correct) { cur.box = Math.min(V_MAX_BOX, cur.box + 1); if (cur.box >= 2) cur.wrong = false; }
   else { cur.box = 0; cur.wrong = true; }
@@ -200,13 +201,34 @@ function buildLevelTabs() {
   });
 }
 
-function selectScope(words, label, key, cardEl) {
+// เปิดหน้ารายละเอียดชุด (ดูคำในชุด + สถิติ)
+function openDeckDetail(words, label) {
   vstate.words = words;
   vstate.scopeLabel = label;
-  vstate.scopeKey = key;
-  const wrap = $("deck-options");
-  wrap.querySelectorAll(".group-card").forEach((b) => b.classList.remove("active"));
-  if (cardEl) cardEl.classList.add("active");
+  renderDeckDetail();
+  showScreen("screen-deck");
+}
+function renderDeckDetail() {
+  const m = vLoad();
+  $("deck-title").textContent = vstate.scopeLabel;
+  const mastered = masteredCount(vstate.words, m);
+  $("deck-mastered").textContent = `แม่น ${mastered}/${vstate.words.length}`;
+  $("deck-fill").style.width = `${(mastered / vstate.words.length) * 100}%`;
+  $("deck-word-list").innerHTML = vstate.words.map((v) => {
+    const s = m[v.word];
+    const box = s?.box ?? 0;
+    const n = s?.n ?? 0;
+    const done = box >= V_MASTERED_BOX;
+    return `
+      <li class="word-row${done ? " word-done" : ""}">
+        <div class="wr-main"><span class="wr-en">${v.word} <span class="wr-pos">${v.pos}</span></span>
+        <span class="wr-th">${v.thai}</span></div>
+        <div class="wr-meta">
+          <span class="wr-times">เล่น ${n} ครั้ง</span>
+          <span class="wr-box">${done ? icon("check") + " แม่น" : "ระดับ " + box + "/" + V_MASTERED_BOX}</span>
+        </div>
+      </li>`;
+  }).join("");
 }
 
 function buildDeckOptions() {
@@ -239,20 +261,13 @@ function buildDeckOptions() {
   }).join("");
   wrap.innerHTML = html;
 
-  // ผูก event + เลือกค่าเริ่มต้น (ชุด 1)
+  // กดการ์ด → เปิดหน้ารายละเอียดชุด
   wrap.querySelectorAll(".group-card").forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (btn.dataset.scope === "review") {
-        selectScope(reviewWordsOf(level), `ทบทวน ${level}`, `review-${level}`, btn);
-      } else {
-        const i = +btn.dataset.index;
-        selectScope(decks[i], `${level} ชุด ${i + 1}`, `deck-${level}-${i}`, btn);
-      }
+      if (btn.dataset.scope === "review") openDeckDetail(reviewWordsOf(level), `ทบทวน ${level}`);
+      else { const i = +btn.dataset.index; openDeckDetail(decks[i], `${level} ชุด ${i + 1}`); }
     });
   });
-  // default: ชุดแรก
-  const firstDeckBtn = wrap.querySelector('.group-card[data-scope="deck"]');
-  if (firstDeckBtn) selectScope(decks[0], `${level} ชุด 1`, `deck-${level}-0`, firstDeckBtn);
 }
 
 function renderVocabProgress() {
@@ -279,6 +294,13 @@ function switchSubject(subject) {
   $("btn-reset-stats").classList.toggle("hidden", vocab);
   if (vocab) renderVocabProgress();
 }
+
+// ปุ่มในหน้ารายละเอียดชุด
+$("btn-play-deck") && $("btn-play-deck").addEventListener("click", () => startVocabRound());
+$("btn-deck-back") && $("btn-deck-back").addEventListener("click", () => {
+  renderVocabProgress();
+  showScreen("screen-start");
+});
 
 (function initVocab() {
   const sub = $("subject-options");
