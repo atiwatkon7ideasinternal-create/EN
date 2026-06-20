@@ -108,6 +108,11 @@ h1 {
   display: inline-flex; align-items: center; gap: .4em;
 }
 h1 .icon-title { color: var(--primary); }
+.app-logo {
+  width: 1.7em; height: 1.7em; border-radius: 50%;
+  background: #fff; padding: 3px; object-fit: contain;
+  vertical-align: -0.45em; box-shadow: 0 2px 10px rgba(0,0,0,.3);
+}
 .subtitle { color: var(--muted); margin-top: 8px; font-size: clamp(.9rem, 3.6vw, 1rem); }
 h3 {
   font-size: .9rem; color: var(--muted); margin: 0 0 10px;
