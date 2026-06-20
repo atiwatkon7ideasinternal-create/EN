@@ -379,7 +379,11 @@ h3 {
 }
 .choice:hover:not(:disabled) { border-color: var(--primary); }
 .choice:active:not(:disabled) { transform: scale(.97); }
-.choice-vocab { font-size: clamp(.95rem, 4vw, 1.1rem); font-weight: 600; min-height: 48px; padding: 10px 14px; line-height: 1.25; }
+.choice-vocab {
+  font-size: clamp(.9rem, 4vw, 1.05rem); font-weight: 600;
+  min-height: 56px; padding: 8px 10px; line-height: 1.2;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+}
 
 /* โหมดคำศัพท์: ย่อส่วนบนให้เห็นคำอธิบายได้โดยไม่ต้องเลื่อน */
 body.vocab-mode .audio-hint { display: none; }

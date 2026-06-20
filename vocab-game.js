@@ -95,7 +95,7 @@ function renderVocabQuestion() {
   speak(v.word, RATE_SOUNDOUT);
 
   const wrap = $("choices");
-  wrap.className = "choices choices-col"; // คำไทยยาว → คอลัมน์เดียว
+  wrap.className = "choices"; // แถวละ 2 คำ (2 คอลัมน์)
   wrap.innerHTML = "";
   vChoices(v).forEach((t) => {
     const b = document.createElement("button");
