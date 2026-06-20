@@ -303,10 +303,7 @@ function backToDeck() {
 
 // ปุ่มในหน้ารายละเอียดชุด
 $("btn-play-deck") && $("btn-play-deck").addEventListener("click", () => startVocabRound());
-$("btn-deck-back") && $("btn-deck-back").addEventListener("click", () => {
-  renderVocabProgress();
-  showScreen("screen-start");
-});
+$("btn-deck-back") && $("btn-deck-back").addEventListener("click", () => history.back());
 
 (function initVocab() {
   const sub = $("subject-options");

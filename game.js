@@ -60,6 +60,11 @@ const shuffle = (arr) => {
 const showScreen = (id) => {
   document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
   $(id).classList.add("active");
+  // ตั้ง history buffer ไว้ 1 อัน เมื่ออยู่หน้าที่ "ไม่ใช่หน้าแรก"
+  // → ปุ่มกลับของเครื่อง (Android/ปัดกลับ) จะเด้งกลับในแอปแทนการออกจากเว็บ
+  if (id !== "screen-start" && !(history.state && history.state.navBuffer)) {
+    try { history.pushState({ navBuffer: true }, ""); } catch (e) { /* ignore */ }
+  }
 };
 // เลื่อนให้เห็นเฉลย + ปุ่มถัดไป อัตโนมัติเมื่อตอบ (ไม่ต้องเลื่อนเอง)
 function scrollToFeedback() {
@@ -490,14 +495,26 @@ function showResult() {
   showScreen("screen-result");
 }
 
-// ── ปุ่มต่าง ๆ (แยกตามวิชา) ──
-function goStartScreen() {
+// ── การกดกลับ (ทั้งปุ่มในเว็บ และปุ่มกลับของเครื่อง) ──
+// routing เมื่อกดกลับ — ดูจากหน้าที่อยู่ปัจจุบัน
+function navBack() {
   if ("speechSynthesis" in window) speechSynthesis.cancel();
-  // โหมดคำศัพท์: กลับไปหน้ารายละเอียดชุดที่เพิ่งเล่น (เห็นคำที่เพิ่งแม่น)
-  if (currentSubject === "vocab" && typeof backToDeck === "function") { backToDeck(); return; }
-  renderHiScore();
-  showScreen("screen-start");
+  const id = document.querySelector(".screen.active")?.id;
+  if (id === "screen-quiz" || id === "screen-result") {
+    if (currentSubject === "vocab" && typeof backToDeck === "function") backToDeck();
+    else { renderHiScore(); showScreen("screen-start"); }
+  } else if (id === "screen-deck") {
+    if (typeof renderVocabProgress === "function") renderVocabProgress();
+    showScreen("screen-start");
+  }
+  // อยู่หน้าแรกแล้ว → ไม่ทำอะไร (ปล่อยให้ออกจากแอปตามปกติ)
 }
+// ปุ่มกลับของเครื่อง (Android/ปัดกลับ) → ยิง popstate → navBack
+window.addEventListener("popstate", navBack);
+// ปุ่มกลับในเว็บ → สั่ง history.back() เพื่อให้ผ่านเส้นทางเดียวกัน (sync กับเครื่อง)
+$("btn-home").addEventListener("click", () => history.back());
+$("btn-back").addEventListener("click", () => history.back());
+
 $("btn-start").addEventListener("click", () => {
   if (currentSubject === "vocab") startVocabRound(); else startGame();
 });
@@ -507,8 +524,6 @@ $("btn-replay").addEventListener("click", () => {
 $("btn-replay-wrong").addEventListener("click", () => {
   if (currentSubject === "vocab") startVocabWrong(); else startGame(state.wrongFirst.slice());
 });
-$("btn-home").addEventListener("click", goStartScreen);
-$("btn-back").addEventListener("click", goStartScreen);
 $("btn-reset-stats").addEventListener("click", () => {
   if (confirm("ล้างสถิติการเรียนทั้งหมด? (ความแม่นของทุกสระจะรีเซ็ต)")) {
     localStorage.removeItem(MASTERY_KEY);
