@@ -432,9 +432,8 @@ function renderFeedback(isCorrect, v) {
   const sentenceHtml = v.sentence.replace(/\{(.+?)\}/, "<mark>$1</mark>");
   $("feedback").innerHTML = `
     <div class="fb-box">
-      <div class="fb-result ${isCorrect ? "ok" : "no"}">
-        ${isCorrect ? icon("check") + " ถูกต้อง!" : icon("x") + " ยังไม่ถูก"} — เสียง ${v.thai} ${v.ipa}
-      </div>
+      <div class="fb-result ${isCorrect ? "ok" : "no"}">${isCorrect ? icon("check") + " ถูกต้อง!" : icon("x") + " ยังไม่ถูก"}</div>
+      <div class="fb-answer">เสียง <b>${v.thai}</b> <span class="fb-pos">${v.ipa}</span></div>
       <div class="fb-word">คำ: ${wordHtml}</div>
       <div class="fb-sentence">
         <span>${sentenceHtml}</span>

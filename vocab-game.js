@@ -141,9 +141,8 @@ function vocabAnswer(btn, picked, v, wrap) {
   const ex = v.example.replace(/\{(.+?)\}/, "<mark>$1</mark>");
   $("feedback").innerHTML = `
     <div class="fb-box">
-      <div class="fb-result ${correct ? "ok" : "no"}">
-        ${correct ? icon("check") + " ถูกต้อง!" : icon("x") + " ยังไม่ถูก"} — <b>${v.word}</b> ${v.pos} = ${v.thai}
-      </div>
+      <div class="fb-result ${correct ? "ok" : "no"}">${correct ? icon("check") + " ถูกต้อง!" : icon("x") + " ยังไม่ถูก"}</div>
+      <div class="fb-answer"><b>${v.word}</b> <span class="fb-pos">${v.pos}</span> = ${v.thai}</div>
       <div class="fb-sentence"><span>${ex}</span><button class="mini-audio" title="ฟังประโยค">${icon("volume")}</button></div>
       <div class="fb-hint">${icon("bulb")} ${v.explain}</div>
     </div>`;

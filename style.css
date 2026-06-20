@@ -541,9 +541,12 @@ body.vocab-mode .choices { gap: 8px; }
   box-shadow: var(--shadow-sm);
   animation: fade .25s;
 }
-.fb-result { font-weight: 800; font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: center; gap: .4em; }
+.fb-result { font-weight: 800; font-size: 1.1rem; margin-bottom: 6px; display: flex; align-items: center; gap: .4em; }
 .fb-result.ok { color: var(--green); }
 .fb-result.no { color: var(--red); }
+.fb-answer { font-size: 1.05rem; line-height: 1.45; margin-bottom: 8px; color: var(--text); }
+.fb-answer b { color: var(--text); font-weight: 800; }
+.fb-pos { color: var(--muted); font-weight: 400; font-size: .85rem; }
 .fb-word { font-size: 1.05rem; margin: 6px 0; }
 .fb-word mark { background: none; color: var(--primary); font-weight: 800; }
 .fb-sentence { color: var(--muted); display: flex; align-items: center; gap: 10px; margin-top: 4px; }
