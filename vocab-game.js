@@ -209,6 +209,7 @@ function renderVocabProgress() {
 function switchSubject(subject) {
   currentSubject = subject;
   const vocab = subject === "vocab";
+  document.body.classList.toggle("vocab-mode", vocab); // ย่อ layout ในโหมดคำศัพท์
   $("vowel-panel").classList.toggle("hidden", vocab);
   $("vocab-panel").classList.toggle("hidden", !vocab);
   $("btn-reset-stats").classList.toggle("hidden", vocab); // ปุ่มล้างสถิติเป็นของโหมดสระ
