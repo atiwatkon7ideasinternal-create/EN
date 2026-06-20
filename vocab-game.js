@@ -181,6 +181,7 @@ function showVocabResult() {
       .join("");
   }
   $("btn-replay-wrong").classList.toggle("hidden", vstate.wrong.length === 0);
+  $("btn-home").textContent = "← กลับไปหน้าชุด";
   showScreen("screen-result");
 }
 
@@ -293,6 +294,12 @@ function switchSubject(subject) {
   $("vocab-panel").classList.toggle("hidden", !vocab);
   $("btn-reset-stats").classList.toggle("hidden", vocab);
   if (vocab) renderVocabProgress();
+}
+
+// กลับไปหน้ารายละเอียดชุดที่เล่นอยู่ (อัปเดตสถิติ/สีเขียวล่าสุด)
+function backToDeck() {
+  if (vstate.words && vstate.words.length) { renderDeckDetail(); showScreen("screen-deck"); }
+  else { renderVocabProgress(); showScreen("screen-start"); }
 }
 
 // ปุ่มในหน้ารายละเอียดชุด

@@ -487,14 +487,16 @@ function showResult() {
       .join("");
   }
   $("btn-replay-wrong").classList.toggle("hidden", state.wrongFirst.length === 0);
+  $("btn-home").textContent = "← กลับหน้าแรก";
   showScreen("screen-result");
 }
 
 // ── ปุ่มต่าง ๆ (แยกตามวิชา) ──
 function goStartScreen() {
   if ("speechSynthesis" in window) speechSynthesis.cancel();
+  // โหมดคำศัพท์: กลับไปหน้ารายละเอียดชุดที่เพิ่งเล่น (เห็นคำที่เพิ่งแม่น)
+  if (currentSubject === "vocab" && typeof backToDeck === "function") { backToDeck(); return; }
   renderHiScore();
-  if (typeof renderVocabProgress === "function") renderVocabProgress();
   showScreen("screen-start");
 }
 $("btn-start").addEventListener("click", () => {
