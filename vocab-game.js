@@ -6,7 +6,7 @@ const VMASTERY_KEY = "vocab_mastery_v1";
 const ROUND_SIZE = 10;
 const NEW_PER_ROUND = 7;
 const REVIEW_PER_ROUND = 3;
-const DECK_SIZE = 40;        // คำต่อชุด
+const DECK_SIZE = 20;        // คำต่อชุด
 const V_MASTERED_BOX = 4;
 const V_MAX_BOX = 5;
 
@@ -231,8 +231,8 @@ function buildDeckOptions() {
     const mc = masteredCount(deck, m);
     const passed = mc === deck.length;
     return `
-      <button class="group-card" data-scope="deck" data-index="${i}">
-        <span class="gc-main"><span class="gc-title">ชุด ${i + 1}${passed ? " ✓" : ""}</span>
+      <button class="group-card${passed ? " deck-done" : ""}" data-scope="deck" data-index="${i}">
+        <span class="gc-main"><span class="gc-title">ชุด ${i + 1}${passed ? " " + icon("check") : ""}</span>
         <span class="gc-ex">${first}–${last} · แม่น ${mc}/${deck.length}</span></span>
         <span class="gc-count">${deck.length}</span>
       </button>`;

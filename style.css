@@ -244,6 +244,15 @@ h3 {
 }
 .group-card.active .gc-count { background: var(--primary-strong); color: #fff; }
 
+/* ชุดที่แม่นครบ → เขียว */
+.group-card.deck-done {
+  border-color: var(--green);
+  background: linear-gradient(180deg, rgba(52,211,153,.18), rgba(5,150,105,.08));
+}
+.group-card.deck-done .gc-title { color: var(--green); display: inline-flex; align-items: center; gap: .35em; }
+.group-card.deck-done .gc-count { background: var(--green-d); color: #fff; }
+.group-card.deck-done.active { box-shadow: 0 0 0 2px var(--green) inset; }
+
 /* ── Advanced (collapsible) ── */
 .advanced {
   margin-top: clamp(16px, 4vw, 22px);
