@@ -6,7 +6,7 @@ const VMASTERY_KEY = "vocab_mastery_v1";
 const ROUND_SIZE = 10;
 const NEW_PER_ROUND = 7;
 const REVIEW_PER_ROUND = 3;
-const DECK_SIZE = 20;        // คำต่อชุด
+const DECK_SIZE = 40;        // คำต่อชุด
 const V_MASTERED_BOX = 4;
 const V_MAX_BOX = 5;
 
